@@ -8,12 +8,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandDetailsComponent implements OnInit {
-  details$: Object;
+  brandDetails: Object = null;
+  brandIdSearchStr;
+  showNoResultsMsg = false;
   constructor(private data: DataService) { }
 
-  ngOnInit() {
-    this.data.getDetails().subscribe(
-      data => this.details$ = data
+  ngOnInit() {}
+
+  getBrandDertails() {
+    this.data.getBrandDetails().subscribe(
+      data => {
+        this.brandDetails = data;
+        this.showNoResultsMsg = data ? false : true;
+      }
     );
   }
 
