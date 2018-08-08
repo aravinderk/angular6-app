@@ -1,0 +1,45 @@
+.brandConainer, .addBrandConainer {
+    padding: 20px;
+    font-size: 14px;
+    .title {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+    .sub-title {
+        font-size: 12px;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+    .details-block {
+        background-color: #FFF;
+        border-radius: 4px;
+        border: 1px solid #EEE;
+        margin: 20px 10px;
+    }
+    .addBrandBtnSec {
+        padding: 0;
+        button:first-child {
+            margin-right: 20px;
+        }
+    }
+    #addAnotherAttribute {
+        margin: 20px 0;
+    }
+    .brand-details {
+        label {
+            margin: 0;
+        }
+        .fieldValue {
+            font-size: 12px;
+            font-weight: 600;
+        }
+    }
+    .brandFnBtn {
+        margin-top: 50px;
+        button {
+            min-width: 80px;
+            margin-left: 20px;
+        }
+    }
+}
