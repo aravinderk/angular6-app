@@ -1,0 +1,38 @@
+{
+	"brandId": "98524-asasa343",
+	"brandName": "Test Brand",
+	"brandAttributes": {
+		"contentType": [{
+			"emailInfo": {
+				"from": {
+					"email": "test@test.com",
+					"name": "test name"
+				},
+				"options": {
+					"clickTracking": true,
+					"openTracking": true,
+					"retryPeriod": "email_2_day_retry"
+				},
+				"replyTo": {
+					"email": "testreply@test.com",
+					"name": "test reply name"
+				},
+				"returnPath": "test@returnpath.com"
+			},
+			"name": "Statement"
+		}]
+	},
+	"brandMatchingAttributes": {
+		"address": {
+			"city": "hyd",
+			"line1": "street 1",
+			"line2": "street 2"
+		}
+	},
+	"additionalAttributes": {
+		"emOrgId": "org12287",
+		"sourceSystemBrandId": "WFM",
+		"sourceSystemId": "POSTEDGE"
+	},
+	"status": "ACTIVE"
+}
