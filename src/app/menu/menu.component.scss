@@ -1,20 +1,25 @@
-nav {
-    background: #2D2E2E;
+aside {
+    width: 220px;
+    background-color: #e3e9ee;
     height: 100%;
     ul {
-        list-style-type: none;
-        padding: 0;
         margin: 0;
+        padding: 0;
         li {
+            list-style: none;
+            border-bottom: 1px solid #cdd5dc;
             a {
-                color: #fff;
-                padding: 20px;
+                color: #17a2b8;
                 display: block;
-            }
-            .activated {
-                background-color: #00a8ff;
+                padding: 10px;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 16px;
+                &.active, &:hover {
+                    background-color: #17a2b8;
+                    color: #FFF;
+                }
             }
         }
     }
-    
 }
