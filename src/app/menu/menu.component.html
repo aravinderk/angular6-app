@@ -1,14 +1,6 @@
-<nav>
+<aside>
   <ul>
-    <li>
-      <a routerLink="" [class.activated]="currentUrl == '/'">
-        <i class="material-icons">supervised_user_circle</i>
-      </a>
-    </li>
-    <li>
-      <a routerLink="/details/2" [class.activated]="currentUrl == '/details/2'">
-        <i class="material-icons">message</i>
-      </a>
-    </li>
+    <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
+    <li><a routerLinkActive="active" routerLink="/brand">Brand</a></li>
   </ul>
-</nav>
+</aside>
