@@ -8,7 +8,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getDetails() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users')
+  getBrandDetails() {
+    return this.http.get('../assets/data/getBrand.json');
   }
 }
