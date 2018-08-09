@@ -46,10 +46,11 @@ export class BrandDetailsComponent implements OnInit {
     this.showDeletePopup = true;
   }
 
-  deleteBrandCallback() {
+  deleteBrandCallback(isDeleted) {
     this.showDeletePopup = false;
-    this.brandDetails = null;
-    this.brandIdSearchStr = '';
+    if (isDeleted) {
+      this.brandDetails = null;
+      this.brandIdSearchStr = '';
+    }
   }
-
 }
