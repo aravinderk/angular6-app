@@ -3,9 +3,9 @@
     <div class="input-group col-sm-4">
       <input type="text" class="form-control" [(ngModel)]="brandIdSearchStr" placeholder="Brand ID" aria-label="Brand ID" aria-describedby="brand-search">
       <div class="input-group-append">
-        <button class="btn btn-info" type="button" [disabled]="!brandIdSearchStr" id="brand-search" (click)="getBrandDertails()">Search</button>
+        <button class="btn btn-info" type="button" [disabled]="!brandIdSearchStr" id="brand-search" (click)="getBrandDertails(brandIdSearchStr)">Search</button>
       </div>
-      <button class="btn btn-info btn-sm" type="button" routerLink="/add-brand" style="margin-left: 20px;">Add New</button>
+      <button class="btn btn-info btn-sm" type="button" (click)="redirectToAddBrand()" style="margin-left: 20px;">Add New</button>
     </div>
   </div>
   <div class="noResults" [hidden]="!showNoResultsMsg">No resultd found. Try some other brand ID. {{noResults}}</div>
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-sm-6 text-right brandFnBtn">
       <button class="btn btn-info btn-sm" type="button" routerLink="/edit-brand">Edit</button>
-      <button class="btn btn-danger btn-sm" type="button">Delete</button>
+      <button class="btn btn-danger btn-sm" type="button" (click)="deleteBrand(brandDetails.brandId)">Delete</button>
     </div>
   </div>
 
@@ -135,4 +135,5 @@
     </div>
   </div>
   </div>
+  <app-delete-brand [show]=showDeletePopup [deleteBrandCallback]=deleteBrandCallbackFn></app-delete-brand>
 </div>
