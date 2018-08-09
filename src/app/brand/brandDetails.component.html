@@ -135,5 +135,5 @@
     </div>
   </div>
   </div>
-  <app-delete-brand [show]=showDeletePopup [deleteBrandCallback]=deleteBrandCallbackFn></app-delete-brand>
+  <app-delete-brand *ngIf="brandDetails" [show]=showDeletePopup [deleteBrandCallback]=deleteBrandCallbackFn [brandId]=brandDetails.brandId></app-delete-brand>
 </div>
