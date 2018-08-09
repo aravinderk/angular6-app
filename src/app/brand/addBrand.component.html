@@ -8,15 +8,21 @@
           <div class="col-sm-12 title">BRAND DETAILS</div>
           <div class="col-sm-6 form-group">
               <label>Brand ID</label>
-              <input type="text" class="form-control" name="brandId" placeholder="Brand ID" [(ngModel)]="brandDetailsObj.brandId" required />
+              <input type="text" class="form-control" name="brandId" placeholder="Brand ID"
+                [(ngModel)]="brandDetailsObj.brandId" [ngClass]="{'invalid': brandId.invalid && f.submitted && brandId.errors.required}" #brandId="ngModel" required />
+              <div *ngIf="brandId.invalid && f.submitted && brandId.errors.required" class="errorMsg">Please enter brand id.</div>
             </div>
           <div class="col-sm-6 form-group">
               <label>Brand name</label>
-              <input type="text" class="form-control" name="brandName" placeholder="Brand name" [(ngModel)]="brandDetailsObj.brandName" required />
+              <input type="text" class="form-control" name="brandName" placeholder="Brand name" [(ngModel)]="brandDetailsObj.brandName"
+              [ngClass]="{'invalid': brandName.invalid && f.submitted && brandName.errors.required}" #brandName="ngModel" required />
+              <div *ngIf="brandName.invalid && f.submitted && brandName.errors.required" class="errorMsg">Please enter brand name.</div>
           </div>
           <div class="col-sm-6 form-group">
               <label>Status</label>
-              <input type="text" class="form-control" placeholder="Status" name="status" [(ngModel)]="brandDetailsObj.status">
+              <input type="text" class="form-control" placeholder="Status" name="status" [(ngModel)]="brandDetailsObj.status"
+              [ngClass]="{'invalid': status.invalid && f.submitted && status.errors.required}" #status="ngModel" required />
+              <div *ngIf="status.invalid && f.submitted && status.errors.required" class="errorMsg">Please enter status.</div>
           </div>
         </div>
       </div>
