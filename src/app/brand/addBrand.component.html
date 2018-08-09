@@ -1,21 +1,22 @@
 <div class="addBrandConainer">
-  <div class="title">ADD BRAND</div>
-  <form>
+  <div class="title" *ngIf="brandDetailsObj.brandType !== 'EXISTING'">ADD BRAND</div>
+  <div class="title" *ngIf="brandDetailsObj.brandType === 'EXISTING'">EDIT BRAND</div>
+  <form name="brandForm" (ngSubmit)="f.form.valid && addOrUpdateBrand()" #f="ngForm" novalidate>
     <div class="row">
       <div class="col-sm-6 details-block">
         <div class="row">
           <div class="col-sm-12 title">BRAND DETAILS</div>
           <div class="col-sm-6 form-group">
               <label>Brand ID</label>
-              <input type="text" class="form-control" placeholder="Brand ID">
-          </div>
+              <input type="text" class="form-control" name="brandId" placeholder="Brand ID" [(ngModel)]="brandDetailsObj.brandId" required />
+            </div>
           <div class="col-sm-6 form-group">
               <label>Brand name</label>
-              <input type="text" class="form-control" placeholder="Brand name">
+              <input type="text" class="form-control" name="brandName" placeholder="Brand name" [(ngModel)]="brandDetailsObj.brandName" required />
           </div>
           <div class="col-sm-6 form-group">
               <label>Status</label>
-              <input type="text" class="form-control" placeholder="Status">
+              <input type="text" class="form-control" placeholder="Status" name="status" [(ngModel)]="brandDetailsObj.status">
           </div>
         </div>
       </div>
@@ -25,57 +26,58 @@
       <div class="col-sm-6 details-block">
         <div class="row">
           <div class="col-sm-12 title">BRAND ATTRIBUTES</div>
-          <div class="col-sm-12">
+          <div class="col-sm-12 brandAttributeSection" *ngFor="let attributes of brandDetailsObj.brandAttributes.contentType; let i = index" [attr.data-index]="i">
             <div class="row">
+              <div class="col-sm-12 text-right" *ngIf="brandDetailsObj.brandAttributes.contentType.length > 1"><button class="btn btn-sm btn-danger" type="button" (click)="deleteBrandAttribute(i)">Delete</button></div>
               <div class="col-sm-6">
                   <div class="form-group">
                       <label>Attribute Name</label>
-                      <input type="text" class="form-control" placeholder="Attribute Name">
+                      <input type="text" class="form-control" placeholder="Attribute Name" name="attrName" [(ngModel)]="attributes.name" />
                   </div>
               </div>
               <div class="col-sm-6">
                   <div class="form-group">
                       <label>Return Path</label>
-                      <input type="text" class="form-control" placeholder="Return Path">
+                      <input type="text" class="form-control" placeholder="Return Path" name="returnPath" [(ngModel)]="attributes.returnPath" />
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="sub-title">FROM EMAIL INFO</div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" placeholder="Email" name="fromEmail" [(ngModel)]="attributes.emailInfo.from.email">
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="Name" name="fgromName" [(ngModel)]="attributes.emailInfo.from.name">
+                </div>
+                <div class="form-check form-group">
+                  <input class="form-check-input" type="checkbox" name="clickTracking" [(ngModel)]="attributes.emailInfo.options.clickTracking">
+                  <label class="form-check-label">Click Tracking</label>
+                </div>
+                <div class="form-check form-group">
+                  <input class="form-check-input" type="checkbox" name="openTracking" [(ngModel)]="attributes.emailInfo.options.openTracking">
+                  <label class="form-check-label">Open Tracking</label>
+                </div>
+                <div class="form-group">
+                    <label>Retry Period</label>
+                    <input type="text" class="form-control" placeholder="Retry Period" name="retryPeriod" [(ngModel)]="attributes.emailInfo.options.retryPeriod">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="sub-title">TO EMAIL INFO</div>
+                  <div class="form-group">
+                      <label>Email</label>
+                      <input type="text" class="form-control" placeholder="Email" name="toEmail" [(ngModel)]="attributes.emailInfo.replyTo.email">
+                  </div>
+                  <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" placeholder="Name" name="toName" [(ngModel)]="attributes.emailInfo.replyTo.name">
                   </div>
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <div class="sub-title">FROM EMAIL INFO</div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" placeholder="Name">
-            </div>
-            <div class="form-check form-group">
-              <input class="form-check-input" type="checkbox" value="">
-              <label class="form-check-label">Click Tracking</label>
-            </div>
-            <div class="form-check form-group">
-              <input class="form-check-input" type="checkbox" value="">
-              <label class="form-check-label">Open Tracking</label>
-            </div>
-            <div class="form-group">
-                <label>Retry Period</label>
-                <input type="text" class="form-control" placeholder="Retry Period">
-            </div>
-          </div>
-          <div class="col-sm-6">
-              <div class="sub-title">TO EMAIL INFO</div>
-              <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" class="form-control" placeholder="Email">
-              </div>
-              <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" class="form-control" placeholder="Name">
-              </div>
-          </div>
-          <div class="col-sm-12"><button type="button" class="btn btn-info btn-sm" id="addAnotherAttribute">Add another</button></div>
+          <div class="col-sm-12"><button type="button" class="btn btn-info btn-sm" id="addAnotherAttribute" (click)="addBrandAttribute()">Add another</button></div>
         </div>
       </div>
     </div>
@@ -87,30 +89,30 @@
             <div class="title">Address</div>
             <div class="form-group">
                 <label>City</label>
-                <input type="text" class="form-control" placeholder="City">
+                <input type="text" class="form-control" placeholder="City" name="city" [(ngModel)]="brandDetailsObj.brandMatchingAttributes.address.city">
             </div>
             <div class="form-group">
                 <label>Line 1</label>
-                <input type="text" class="form-control" placeholder="Line 1">
+                <input type="text" class="form-control" placeholder="Line 1" name="line1" [(ngModel)]="brandDetailsObj.brandMatchingAttributes.address.line1">
             </div>
             <div class="form-group">
                 <label>Line 2</label>
-                <input type="text" class="form-control" placeholder="Line 2">
+                <input type="text" class="form-control" placeholder="Line 2" name="line2" [(ngModel)]="brandDetailsObj.brandMatchingAttributes.address.line2">
             </div>
           </div>
           <div class="col-sm-6">
               <div class="title">Additional ATTRIBUTES</div>
               <div class="form-group">
                   <label>Org Id</label>
-                  <input type="text" class="form-control" placeholder="Org Id">
+                  <input type="text" class="form-control" placeholder="Org Id" name="emOrgId" [(ngModel)]="brandDetailsObj.additionalAttributes.emOrgId" >
               </div>
               <div class="form-group">
                   <label>Source System Brand ID</label>
-                  <input type="text" class="form-control" placeholder="Source System Brand ID">
+                  <input type="text" class="form-control" placeholder="Source System Brand ID" name="sourceSystemBrandId" [(ngModel)]="brandDetailsObj.additionalAttributes.sourceSystemBrandId">
               </div>
               <div class="form-group">
                   <label>Source System ID</label>
-                  <input type="text" class="form-control" placeholder="Source System ID">
+                  <input type="text" class="form-control" placeholder="Source System ID" name="sourceSystemId" [(ngModel)]="brandDetailsObj.additionalAttributes.sourceSystemId">
               </div>
           </div>
         </div>
@@ -118,8 +120,9 @@
     </div>
     <div class="row">
       <div class="col-sm-6 text-right addBrandBtnSec">
-        <button type="button" class="btn btn-dark">Reset</button>
-        <button type="button" class="btn btn-info">Submit</button>
+        <button type="button" class="btn btn-dark" routerLink="/brand" *ngIf="brandDetailsObj.brandType === 'EXISTING'">Cancel</button>
+        <button type="button" class="btn btn-dark" *ngIf="brandDetailsObj.brandType !== 'EXISTING'" (click)="resetBrandForm()">Reset</button>
+        <button type="submit" class="btn btn-info">Submit</button>
       </div>
     </div>
   </form>
