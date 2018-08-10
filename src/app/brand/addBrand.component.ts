@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService, Brand, defaultBrandObj } from '../data.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,11 +7,13 @@ import { Observable } from 'rxjs';
   templateUrl: './addBrand.component.html',
   styleUrls: ['./brand.component.scss']
 })
+
 export class AddBrandComponent implements OnInit {
-  brandDetailsObj: object;
+  brandDetailsObj: Brand;
   constructor(private data: DataService) { }
   ngOnInit() {
     this.data.brandDetailsObj.subscribe(obj => {
+      obj = obj || defaultBrandObj;
       this.brandDetailsObj = obj;
     });
   }
@@ -24,9 +26,18 @@ export class AddBrandComponent implements OnInit {
     this.brandDetailsObj.brandAttributes.contentType.splice(index, 1);
   }
 
-  resetBrandForm(type) {
-    const obj = this.data.getInitialBrandObj(type);
-    this.data.setBrandDetails(obj);
+  resetBrandForm() {
+    this.data.setBrandDetails({
+      brandId: '',
+      brandName: '',
+      status: '',
+      brandType: '',
+      brandAttributes: {
+        contentType: [{emailInfo: {from: {}, options: {}, replyTo: {}}}]
+      },
+      brandMatchingAttributes: {address: {}},
+      additionalAttributes: {}
+    });
   }
 
   addOrUpdateBrand() {
@@ -37,7 +48,7 @@ export class AddBrandComponent implements OnInit {
     } else {
       this.data.addBrand(this.brandDetailsObj).subscribe(
         data => {
-          this.resetBrandForm('NEW');
+          this.resetBrandForm();
         }
       );
     }
