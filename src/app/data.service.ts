@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class DataService {
 
   BRAND_URL = '../assets/data/getBrand.json';
+  // BRAND_URL = 'https://u9tticv9ta.execute-api.us-east-1.amazonaws.com/DEV/v1/ipmapi/brand'
 
   constructor(private http: HttpClient) { }
   private brandObj = new BehaviorSubject(this.getInitialBrandObj('NEW'));
