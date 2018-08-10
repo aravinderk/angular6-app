@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./brand.component.scss']
 })
 export class BrandDetailsComponent implements OnInit {
-  brandDetails: Object = null;
+  brandDetails: any = null;
   brandIdSearchStr;
   showNoResultsMsg = false;
   showDeletePopup;
@@ -23,8 +23,8 @@ export class BrandDetailsComponent implements OnInit {
   getBrandDertails(brandId) {
     this.data.getBrandDetails(brandId).subscribe(
       data => {
-        data.brandType = 'EXISTING';
         this.brandDetails = data;
+        this.brandDetails.brandType = 'EXISTING';
         this.showNoResultsMsg = data ? false : true;
         this.data.setBrandDetails(this.brandDetails);
       }
@@ -33,6 +33,10 @@ export class BrandDetailsComponent implements OnInit {
 
   redirectToAddBrand() {
     this.data.setBrandDetails({
+      brandId: '',
+      brandName: '',
+      status: '',
+      brandType: '',
       brandAttributes: {
         contentType: [{emailInfo: {from: {}, options: {}, replyTo: {}}}]
       },
