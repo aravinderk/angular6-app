@@ -1,14 +1,35 @@
 header {
     width: 100%;
     overflow: auto;
-    height: 80px;
-    background-color: #111218;
+    height: 65px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 40, 100, 0.12);
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    justify-content: space-between;
+    padding: 0 5%;
     .app-title {
-        color: #FFF;
+        color: #777;
         font-size: 18px;
         font-weight: bold;
+    }
+    .userInfo {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        .userIcon {
+            height: 45px;
+            width: 45px;
+            border: 1px solid #DDD;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 }

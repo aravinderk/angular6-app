@@ -1,15 +1,14 @@
 main {
-    background-color: #f1f5f8;
+    background-color: #f5f7fb;
     height: 100%;
     overflow: hidden;
 }
 section {
-    display: flex;
     height: calc(100vh - 80px);
     overflow: hidden;
     #main-content {
-        width: calc(100vw - 220px);
         height: 100%;
         overflow: auto;
+        padding: 30px 5%;
     }
 }

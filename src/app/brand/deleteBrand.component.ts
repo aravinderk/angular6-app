@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from '../data.service';
 import {Router} from '@angular/router';
+import { DataService } from '../data.service';
+import {CONSTANT} from '../constants';
 
 @Component({
   selector: 'app-delete-brand',
@@ -17,7 +18,11 @@ export class DeleteBrandComponent implements OnInit {
     deleteBrand(brandId) {
         this.data.deleteBrand(brandId).subscribe(
             data => {
+                this.data.setNotification({type: 'success', text: CONSTANT.messages.deleteBrandSuccess});
                 this.deleteBrandCallback(true);
+            },
+            err => {
+                this.data.setNotification({type: 'error', text: CONSTANT.messages.deleteBrandError});
             }
         );
     }

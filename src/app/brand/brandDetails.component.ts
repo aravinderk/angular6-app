@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { DataService } from '../data.service';
+import {CONSTANT} from '../constants';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,6 +28,9 @@ export class BrandDetailsComponent implements OnInit {
         this.brandDetails.brandType = 'EXISTING';
         this.showNoResultsMsg = data ? false : true;
         this.data.setBrandDetails(this.brandDetails);
+      },
+      err => {
+        this.data.setNotification({type: 'error', text: CONSTANT.messages.brandError})
       }
     );
   }

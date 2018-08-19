@@ -42,12 +42,19 @@ export class DataService {
   private brandObj = new BehaviorSubject(this.obj);
   brandDetailsObj = this.brandObj.asObservable();
 
+  private notificationObj = new BehaviorSubject(Object);
+  notification = this.notificationObj.asObservable();
+
+  setNotification(obj) {
+    this.notificationObj.next(obj);
+  }
+
   setBrandDetails(brandObj) {
     this.brandObj.next(brandObj);
   }
 
   getBrandDetails(brandId) {
-    return this.http.get(`${this.BRAND_URL}?${brandId}`);
+    return this.http.get(`${this.BRAND_URL}/${brandId}`);
   }
 
   deleteBrand(brandId) {
@@ -55,10 +62,12 @@ export class DataService {
   }
 
   addBrand(brandObj) {
+    delete brandObj['brandType'];
     return this.http.post(this.BRAND_URL, brandObj);
   }
 
   updateBrand(brandObj) {
+    delete brandObj['brandType'];
     return this.http.put(`${this.BRAND_URL}/${brandObj.brandId}`, brandObj);
   }
 }

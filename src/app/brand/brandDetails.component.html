@@ -1,6 +1,6 @@
 <div class="brandConainer">
   <div class="row">
-    <div class="input-group col-sm-4">
+    <div class="input-group col-sm-6">
       <input type="text" class="form-control" [(ngModel)]="brandIdSearchStr" placeholder="Brand ID" aria-label="Brand ID" aria-describedby="brand-search">
       <div class="input-group-append">
         <button class="btn btn-info" type="button" [disabled]="!brandIdSearchStr" id="brand-search" (click)="getBrandDertails(brandIdSearchStr)">Search</button>
@@ -11,7 +11,7 @@
   <div class="noResults" [hidden]="!showNoResultsMsg">No resultd found. Try some other brand ID. {{noResults}}</div>
   <div [hidden]="(!brandDetails)">
   <div class="row">
-    <div class="col-sm-6 text-right brandFnBtn">
+    <div class="col-sm-8 text-right brandFnBtn">
       <button class="btn btn-info btn-sm" type="button" routerLink="/edit-brand">Edit</button>
       <button class="btn btn-danger btn-sm" type="button" (click)="deleteBrand(brandDetails.brandId)">Delete</button>
     </div>
@@ -19,7 +19,7 @@
 
   <div class="brand-details" *ngIf="brandDetails">
     <div class="row">
-      <div class="col-sm-6 details-block">
+      <div class="col-sm-8 details-block">
         <div class="row">
           <div class="col-sm-12 title">BRAND DETAILS</div>
           <div class="col-sm-6 form-group">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6 details-block" *ngIf="brandDetails && brandDetails.brandAttributes && brandDetails.brandAttributes.contentType">
+      <div class="col-sm-8 details-block" *ngIf="brandDetails && brandDetails.brandAttributes && brandDetails.brandAttributes.contentType">
         <div class="row">
           <div class="col-sm-12 title">BRAND ATTRIBUTES</div>
           <div class="col-sm-12">
@@ -98,7 +98,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6 details-block">
+      <div class="col-sm-8 details-block">
         <div class="row">
           <div class="col-sm-6" *ngIf="brandDetails && brandDetails.brandMatchingAttributes && brandDetails.brandMatchingAttributes.address">
             <div class="title">Address</div>

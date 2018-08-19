@@ -1,6 +1,9 @@
-<aside>
+<div id="menu">
   <ul>
     <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
     <li><a routerLinkActive="active" routerLink="/brand">Brand</a></li>
   </ul>
-</aside>
+  <div class="alert" [ngClass]="alertClazz" role="alert" *ngIf="notification && notification.text">
+    {{notification.text}}
+  </div>
+</div>

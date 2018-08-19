@@ -3,15 +3,15 @@
   <div class="title" *ngIf="brandDetailsObj.brandType === 'EXISTING'">EDIT BRAND</div>
   <form name="brandForm" (ngSubmit)="f.form.valid && addOrUpdateBrand()" #f="ngForm" novalidate>
     <div class="row">
-      <div class="col-sm-6 details-block">
+      <div class="col-sm-8 details-block">
         <div class="row">
           <div class="col-sm-12 title">BRAND DETAILS</div>
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-6 form-group" *ngIf="brandDetailsObj.brandType === 'EXISTING'">
               <label>Brand ID</label>
               <input type="text" class="form-control" name="brandId" placeholder="Brand ID"
                 [(ngModel)]="brandDetailsObj.brandId" [ngClass]="{'invalid': brandId.invalid && f.submitted && brandId.errors.required}" #brandId="ngModel" required />
               <div *ngIf="brandId.invalid && f.submitted && brandId.errors.required" class="errorMsg">Please enter brand id.</div>
-            </div>
+          </div>
           <div class="col-sm-6 form-group">
               <label>Brand name</label>
               <input type="text" class="form-control" name="brandName" placeholder="Brand name" [(ngModel)]="brandDetailsObj.brandName"
@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6 details-block">
+      <div class="col-sm-8 details-block">
         <div class="row">
           <div class="col-sm-12 title">BRAND ATTRIBUTES</div>
           <div class="col-sm-12 brandAttributeSection" *ngFor="let attributes of brandDetailsObj.brandAttributes.contentType; let i = index" [attr.data-index]="i">
@@ -89,7 +89,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6 details-block">
+      <div class="col-sm-8 details-block">
         <div class="row">
           <div class="col-sm-6">
             <div class="title">Address</div>
@@ -125,7 +125,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 text-right addBrandBtnSec">
+      <div class="col-sm-8 text-right addBrandBtnSec">
         <button type="button" class="btn btn-dark" routerLink="/brand" *ngIf="brandDetailsObj.brandType === 'EXISTING'">Cancel</button>
         <button type="button" class="btn btn-dark" *ngIf="brandDetailsObj.brandType !== 'EXISTING'" (click)="resetBrandForm()">Reset</button>
         <button type="submit" class="btn btn-info">Submit</button>

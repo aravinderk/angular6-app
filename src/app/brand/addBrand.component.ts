@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, Brand, defaultBrandObj } from '../data.service';
+import {CONSTANT} from '../constants';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -43,12 +44,21 @@ export class AddBrandComponent implements OnInit {
   addOrUpdateBrand() {
     if (this.brandDetailsObj.brandType === 'EXISTING') {
       this.data.updateBrand(this.brandDetailsObj).subscribe(
-        data => {}
+        data => {
+          this.data.setNotification({type: 'success', text: CONSTANT.messages.updateBrandSuccess});
+        },
+        err => {
+          this.data.setNotification({type: 'error', text: CONSTANT.messages.updateBrandError});
+        }
       );
     } else {
       this.data.addBrand(this.brandDetailsObj).subscribe(
         data => {
           this.resetBrandForm();
+          this.data.setNotification({type: 'success', text: CONSTANT.messages.addBrandSuccess});
+        },
+        err => {
+          this.data.setNotification({type: 'error', text: CONSTANT.messages.addBrandError});
         }
       );
     }
